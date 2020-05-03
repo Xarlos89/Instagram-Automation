@@ -1,5 +1,6 @@
 # Instagram-bot
  A simple instagram bot. Initial upload.
+ This bot is provided for educational purposes only. I am not responsible for what you do, or what happens to your accounts when you use this bot. 
 
 -----------------------------
 
