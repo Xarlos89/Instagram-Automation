@@ -1,6 +1,6 @@
 # Instagram-bot
  A simple instagram bot. Initial upload.
- This bot is provided for educational purposes only. I am not responsible for what you do, or what happens to your accounts when you use this bot. 
+ This bot is provided for educational purposes only. I am not responsible for what you do, or what happens to your accounts when you use this bot.
 
 -----------------------------
 
@@ -30,16 +30,20 @@ Using the Instabot
   2 = Like Hashtagged posts
   3 = Exit
 
-To change hashtags, edit hashtag_list in the Instabot.py file.
+To change hashtags, edit hashtag_list in the Instabot.py file OR use the built-in function. (supports copy and paste. no #-sign.)
 To change number of story views, change the number on the end of line 61.
 To change number of likes before moving onto the next hashtag, change number on the end of line 87.
 
 -----------------------------
+May 4, 2020
+- Added functionality to update hashtag lists from the terminal.
+  - clear function is broken. It will prompt you "do you want to clear?", but despite your answer will always clear the list.
+
+- tweaked the waiting times "sleep()" to avoid crashes with slow loading pages.
 
 Future updates
-
-- Looking to add a menu option to edit the list of hashtags.
+- looking to add a file read/write feature to keep hashtag list in a .txt file.
 - Looking to add menu option to edit the amount of stories viewed.
 - Looking to add menu option to edit the amount of likes per hashtag.
 - Looking to add login feature at the beginning of the sequence so the
-  user doesn't have to update the files by themselves.
+  user doesn't have to update the secret.py file.
