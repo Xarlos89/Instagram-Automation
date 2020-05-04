@@ -14,10 +14,10 @@ https://www.google.com/chrome/
 
 
   - Place the file "Chromedriver" in the project folder.
-  - Once you have placed Chromedriver in your project folder, change the path on line 122 and 123 to your chromedriver file path.
+  - Once you have placed Chromedriver in your project folder, change the path on line 201 and 202 to your chromedriver file path.
   - Edit Secret.py to your Login credentials.
-  - To change number of story views, change the number on the end of line 61.
-  - To change number of likes before moving onto the next hashtag, change number on the end of line 87.
+  - To change number of story views, change the number on the end of line 67.
+  - To change number of likes before moving onto the next hashtag, change number on the end of line 93.
 
 
 -----------------------------
