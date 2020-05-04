@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import random
 from random import randint
@@ -36,7 +37,8 @@ def menu():
     menu = {}
     menu['1'] = "Watch Instagram Stories"
     menu['2'] = "Like Hashtagged posts"
-    menu['3'] = "Exit"
+    menu['3'] = "Edit hashtag list"
+    menu['4'] = "Exit"
     while True:
         options = menu.keys()
         for entry in options:
@@ -48,9 +50,13 @@ def menu():
         elif selection == '2':
             likes()
         elif selection == '3':
-            sys.exit()
+            os.system('clear')
+            hashtag_menu()
+        elif selection == '4':
+            os.system('clear')
+            break
         else:
-            print("You have to choose an option between 1 and 3. ")
+            print("You have to choose an option between 1 and 4. ")
 
 def watchstories():
     sleep(1)
@@ -115,8 +121,81 @@ def likes():
     sleep(2)
     menu()
 
+################################################### Changing Hashtag list update. Need to add write-to-file functionality.
 
+def makehashlist(new_tag):
+    os.system('clear')
+    hashtag_list.append(new_tag)
+    print("\n====================")
+    for tag in hashtag_list:
+        print(tag)
+    print("\n====================")
+    print("\nAdded {}. List now has {} hashtags.".format(new_tag, len(hashtag_list)))
+    sleep(1)
 
+def show_list():
+    os.system('clear')
+    print("Current hashtag list: ")
+    print("\n====================")
+    for tag in hashtag_list:
+        print(tag)
+    print("\n====================")
+    sleep(1)
+
+def deletetag():
+    os.system('clear')
+    print("\n====================")
+    for tag in hashtag_list:
+        print(tag)
+    print("\n====================")
+    delete_tag = input("\nWhich hashtag would you like to remove from the list? ")
+    hashtag_list.remove(delete_tag)
+    os.system('clear')
+    for tag in hashtag_list:
+        print(tag)
+    print("\n{} has been removed form the hashtag list.".format(delete_tag))
+    sleep(1)
+
+def clearHashtags():
+    os.system('clear')
+    print("\n====================")
+    for tag in hashtag_list:
+        print(tag)
+    print("\n====================")
+    clear_tags = input("\nWould you like to erase your hashtag list?")
+    if clear_tags.lower() == 'yes' or 'y':
+        print("Hashtag list erased...")
+        del hashtag_list[:]
+    else:
+        print("Did not delete hashtag list.")
+
+def hashtag_menu():
+    print("\n====================")
+    for tag in hashtag_list:
+        print(tag)
+    print("====================")
+    print("\n\nEnter 'done' to save your list and go back to the main menu.")
+    print("Enter 'show' to see your list.")
+    print("Enter 'delete' to remove a tag from your list.")
+    print("Enter 'clear' to erase your list.")
+    while True:
+        new_tag = input("\n\nEnter a tag: ")
+
+        if new_tag == 'done'.lower():
+            os.system('clear')
+            break
+        elif new_tag == 'show'.lower():
+            show_list()
+            continue
+        elif new_tag == 'delete'.lower():
+            show_list()
+            deletetag()
+            continue
+        elif new_tag == 'clear'.lower():
+            clearHashtags()
+            continue
+        makehashlist(new_tag)
+    menu()
 
 ### Open Selenium Webdriver
 chromedriver_path = '/Users/Desktop/Instabot/chromedriver'  # Change this to your own chromedriver path!
