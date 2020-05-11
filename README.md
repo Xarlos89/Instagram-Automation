@@ -13,9 +13,6 @@ You must have Google Chrome installed.
 https://www.google.com/chrome/
 
 
-  - Place the file "Chromedriver" in the project folder.
-  - Once you have placed Chromedriver in your project folder, change the path on line 201 and 202 to your chromedriver file path.
-  - Edit Secret.py to your Login credentials.
   - To change number of story views, change the number on the end of line 67.
   - To change number of likes before moving onto the next hashtag, change number on the end of line 93.
 
@@ -24,11 +21,13 @@ https://www.google.com/chrome/
 
 Using the Instabot
 
+- Download or clone the repository to your desktop. 
+- Download the Chromedriver and place this in the repository folder. https://chromedriver.chromium.org/downloads
+  - Once you have placed Chromedriver in your project folder, change the path on line 201 and 202 to your chromedriver file path.
+- Edit Secret.py to your Login credentials.
 - Load the application by starting a command prompt at the project folder.
 - type "Python instabot.py"
-- 1 = Watch Instagram Stories
-  2 = Like Hashtagged posts
-  3 = Exit
+
 
 To change hashtags, edit hashtag_list in the Instabot.py file OR use the built-in function. (supports copy and paste. no #-sign.)
 To change number of story views, change the number on the end of line 61.
