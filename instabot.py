@@ -125,7 +125,6 @@ def likes():
     sleep(2)
     menu()
 
-######################################################################################################
 def hashtag_menu():
      menu2 = {}
      menu2['1'] = "Add hashtag to hashtag list"
@@ -180,8 +179,6 @@ def deletetag():
         for line in list:
             if line.strip("\n") != userinput:
                 f.write(line)
-
-######################################################################################################
 
 ## Open Selenium Webdriver
 chromedriver_path = '/Users/adammiranda-artizada/Desktop/Python/Projects/Instabot/Instabot (working file)/chromedriver'  # Change this to your own chromedriver path!
