@@ -32,7 +32,7 @@ Using the Instabot
 - type "Python instabot.py"
 
 
--To change hashtags, edit hashtag_list in the Instabot.py file OR use the built-in function. (supports copy and paste. no #-sign.)
+- To change hashtags, edit hashtaglist.txt OR use the built-in function. (supports copy and paste. no #-sign.)
 - To change number of story views, change the number on the end of line 68.
 - To change number of likes before moving onto the next hashtag, change number on the end of line 95.
 
