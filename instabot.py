@@ -1,4 +1,5 @@
 import os
+import sys
 import pandas as pd
 import random
 from random import randint
@@ -13,7 +14,6 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 from tqdm import tqdm
 from tqdm import tqdm_gui
-import sys
 sys.path.insert(0, './utils/')
 import secret
 
@@ -24,14 +24,12 @@ print('==========*         Instagram Bot           *==========')
 print('==========*                                 *==========')
 print('==========*                                 *==========')
 print("==================     By: Adam     ===================")
-print("==================    Version 4.0    ==================")
-sleep(2)
+print("==================    Version 5.0    ==================")
+sleep(1)
 print("=============== Loading magic stuff... ================")
 for i in tqdm(range(100)):
-    sleep(0.01)
-    pass
-
-hashtag_list = ['insert', 'hashtags', 'here', 'like', 'this']
+     sleep(0.01)
+     pass
 
 def menu():
     menu = {}
@@ -46,8 +44,10 @@ def menu():
 
         selection = str(input("What would you like to do? "))
         if selection == '1':
+            os.system('clear')
             watchstories()
         elif selection == '2':
+            os.system('clear')
             likes()
         elif selection == '3':
             os.system('clear')
@@ -56,7 +56,8 @@ def menu():
             os.system('clear')
             break
         else:
-            print("You have to choose an option between 1 and 4. ")
+            print("\nYou have to choose an option between 1 and 4. \n")
+            menu()
 
 def watchstories():
     sleep(1)
@@ -73,7 +74,7 @@ def watchstories():
         print('\033[0;33mProgram terminated by the user!\033[m')
         loadstories = 0
     except:
-        print('\033[0;33mEND! No more stories to watch\033[m')
+        print('\033[0;33mEND! No more stories to view\033[m')
         loadstories = 0
     webdriver.find_element_by_class_name('Szr5J').click()
     menu()
@@ -81,6 +82,7 @@ def watchstories():
 def likes():
     likes = 0
     tag = -1
+    hashtag_list = open('***** PATH TO HASHTAGLIST.txt *****').readlines()
     for hashtag in hashtag_list:
         tag = tag+1
         print('Liking the hashtag: ' + hashtag_list[tag])
@@ -90,7 +92,7 @@ def likes():
         image_img.click()
         sleep(1)
         likes = 0
-        while (likes <= 9): #Set max amount of likes. 9 will like a hashtag 10 times.
+        while (likes <= 1): #Set max amount of likes
             sleep(1)
             image_like_svg=webdriver.find_element_by_css_selector('.fr66n > button:nth-child(1) > svg:nth-child(1)')
             image_like_label=image_like_svg.get_attribute("aria-label")
@@ -99,11 +101,11 @@ def likes():
                 image_like_svg.click()
                 likes += 1
                 print('liked images: {}'.format(likes))
-                sleep(randint(5, 7))
+                sleep(randint(4, 9))
                 image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
                 image_next.click()
                 print("Looking for image...")
-                sleep(randint(4, 5))
+                sleep(randint(4, 7))
             else:
                 print('Image already liked')
                 image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
@@ -116,90 +118,74 @@ def likes():
             sleep(2)
             image_close.click()
             sleep(2)
+        print("Finished liking hashtag: " + hashtag_list[tag])
+        sleep(1)
     print("Finished liking all hashtags in the hashtag list.")
     webdriver.get('https://www.instagram.com/')
     sleep(2)
     menu()
 
-################################################### Changing Hashtag list update. Need to add write-to-file functionality.
+######################################################################################################
+def hashtag_menu():
+     menu2 = {}
+     menu2['1'] = "Add hashtag to hashtag list"
+     menu2['2'] = "Show hashtag list"
+     menu2['3'] = "Delete hashtags from hashtag list"
+     menu2['4'] = "Done. Go back to main menu"
+     while True:
+        options2 = menu2.keys()
+        for entry2 in options2:
+            print (entry2, menu2[entry2])
 
-def makehashlist(new_tag):
-    os.system('clear')
-    hashtag_list.append(new_tag)
-    print("\n====================")
-    for tag in hashtag_list:
-        print(tag)
-    print("\n====================")
-    print("\nAdded {}. List now has {} hashtags.".format(new_tag, len(hashtag_list)))
+        selection2 = str(input("What would you like to do? "))
+        if selection2 == '1':
+            add_tag()
+        elif selection2 == '2':
+            show_list()
+        elif selection2 == '3':
+            deletetag()
+        elif selection2 == '4':
+            os.system('clear')
+            menu()
+        else:
+            print("\nYou must choose an option between 1 and 4.\n")
+            hashtag_menu()
+
+def add_tag():
+    with open("hashtaglist.txt", "a") as hashtaglist:
+        hashtaglist.write(input("What tag would you like to add?: "))
+        hashtaglist.write("\n")
+    print("\nAdded tag.")
     sleep(1)
 
 def show_list():
     os.system('clear')
+    file = open("hashtaglist.txt", "r")
     print("Current hashtag list: ")
-    print("\n====================")
-    for tag in hashtag_list:
+    print("\n====================\n")
+    for tag in file:
         print(tag)
-    print("\n====================")
+    print("\n====================\n")
     sleep(1)
 
 def deletetag():
-    os.system('clear')
-    print("\n====================")
-    for tag in hashtag_list:
-        print(tag)
-    print("\n====================")
-    delete_tag = input("\nWhich hashtag would you like to remove from the list? ")
-    hashtag_list.remove(delete_tag)
-    os.system('clear')
-    for tag in hashtag_list:
-        print(tag)
-    print("\n{} has been removed form the hashtag list.".format(delete_tag))
-    sleep(1)
+    with open("hashtaglist.txt", "r") as f:
+        list = f.readlines()
+        print("\nCurrent hastag list.")
+        for line in list:
+            print(line.strip("\n"))
+        print("\n")
+    with open("hashtaglist.txt", "w+") as f:
+        userinput = input("What hastag would you like to delete? ")
+        for line in list:
+            if line.strip("\n") != userinput:
+                f.write(line)
 
-def clearHashtags():
-    os.system('clear')
-    print("\n====================")
-    for tag in hashtag_list:
-        print(tag)
-    print("\n====================")
-    clear_tags = input("\nWould you like to erase your hashtag list?")
-    if clear_tags.lower() == 'yes' or 'y':
-        print("Hashtag list erased...")
-        del hashtag_list[:]
-    else:
-        print("Did not delete hashtag list.")
+######################################################################################################
 
-def hashtag_menu():
-    print("\n====================")
-    for tag in hashtag_list:
-        print(tag)
-    print("====================")
-    print("\n\nEnter 'done' to save your list and go back to the main menu.")
-    print("Enter 'show' to see your list.")
-    print("Enter 'delete' to remove a tag from your list.")
-    print("Enter 'clear' to erase your list.")
-    while True:
-        new_tag = input("\n\nEnter a tag: ")
-
-        if new_tag == 'done'.lower():
-            os.system('clear')
-            break
-        elif new_tag == 'show'.lower():
-            show_list()
-            continue
-        elif new_tag == 'delete'.lower():
-            show_list()
-            deletetag()
-            continue
-        elif new_tag == 'clear'.lower():
-            clearHashtags()
-            continue
-        makehashlist(new_tag)
-    menu()
-
-### Open Selenium Webdriver
-chromedriver_path = '/Users/Desktop/Instabot/chromedriver'  # Change this to your own chromedriver path!
-webdriver = webdriver.Chrome(executable_path="/Users/Desktop/Instabot/chromedriver")# Change this one too
+## Open Selenium Webdriver
+chromedriver_path = '/Users/adammiranda-artizada/Desktop/Python/Projects/Instabot/Instabot (working file)/chromedriver'  # Change this to your own chromedriver path!
+webdriver = webdriver.Chrome(executable_path="/Users/adammiranda-artizada/Desktop/Python/Projects/Instabot/Instabot (working file)/chromedriver")# Change this one too
 sleep(2)
 webdriver.get('https://www.instagram.com/accounts/login/?source=auth_switcher')
 
