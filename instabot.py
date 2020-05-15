@@ -61,13 +61,13 @@ def menu():
 
 def watchstories():
     sleep(1)
-    webdriver.find_element_by_xpath('//div[contains(text(), "Watch All")]').click() # click on the tab where the stories are
+    webdriver.find_element_by_xpath('//*[@id="react-root"]/section/main/section/div[1]/div[1]/div/div/div/div/ul/li[3]/div/button/div[1]/span').click() # click on the tab where the stories are
     stories_watched = 0
     sleep(2)
     try:
         while webdriver.find_element_by_class_name('coreSpriteRightChevron') and stories_watched < 200: # value modifies how many stories you want to watch
             webdriver.find_element_by_class_name('coreSpriteRightChevron').click() # Clicks next story.
-            sleep(randint(1, 2)) # Random timer to skip through stories.
+            sleep(randint(1, 4)) # Random timer to skip through stories.
             stories_watched += 1
             print("stories watched: {}".format(stories_watched))
     except KeyboardInterrupt:
@@ -76,7 +76,7 @@ def watchstories():
     except:
         print('\033[0;33mEND! No more stories to view\033[m')
         loadstories = 0
-    webdriver.find_element_by_class_name('Szr5J').click()
+    #webdriver.find_element_by_class_name('Szr5J').click()  # Exits the story menu. I think Instagram nerfed this.
     menu()
 
 def likes():
