@@ -94,7 +94,7 @@ def likes():
         likes = 0
         while (likes <= 1): #Set max amount of likes
             sleep(1)
-            image_like_svg=webdriver.find_element_by_css_selector('.fr66n > button:nth-child(1) > svg:nth-child(1)')
+            image_like_svg = webdriver.find_element_by_css_selector('body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > div > span > svg')
             image_like_label=image_like_svg.get_attribute("aria-label")
             if image_like_label == "Like":
                 sleep(2)
