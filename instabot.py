@@ -181,8 +181,8 @@ def deletetag():
                 f.write(line)
 
 ## Open Selenium Webdriver
-chromedriver_path = '/Users/adammiranda-artizada/Desktop/Python/Projects/Instabot/Instabot (working file)/chromedriver'  # Change this to your own chromedriver path!
-webdriver = webdriver.Chrome(executable_path="/Users/adammiranda-artizada/Desktop/Python/Projects/Instabot/Instabot (working file)/chromedriver")# Change this one too
+chromedriver_path = '*******UPDATE THIS TO YOUR CHROMEDRIVER FILE PATH*******'  # Change this to your own chromedriver path!
+webdriver = webdriver.Chrome(executable_path="********UPDATE THIS TO YOUR CHROMEDRIVER FILE PATH")# Change this one too
 sleep(2)
 webdriver.get('https://www.instagram.com/accounts/login/?source=auth_switcher')
 
