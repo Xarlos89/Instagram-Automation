@@ -188,18 +188,27 @@ webdriver.get('https://www.instagram.com/accounts/login/?source=auth_switcher')
 
 sleep(3)
 ### Log in
-username = webdriver.find_element_by_name('username')
-username.send_keys(secret.username)
-password = webdriver.find_element_by_name('password')
-password.send_keys(secret.password)
+usernameEntry = webdriver.find_element_by_name('username')
+usernameEntry.clear()
+usernameEntry.send_keys(secret.username)
+passwordEntry = webdriver.find_element_by_name('password');
+passwordEntry.send_keys(secret.password)
 sleep(2)
-button_login = webdriver.find_element_by_xpath('/html/body/div[1]/section/main/div/article/div/div[1]/div/form/div[4]/button')
+button_login = webdriver.find_element_by_xpath('//*[@id="loginForm"]/div/div[3]/button/div')
 button_login.click()
 
 sleep(6)
 ### next 3 lines are for notification box, remove if you dont get the box
-notnow = webdriver.find_element_by_css_selector('button.aOOlW:nth-child(2)')
-notnow.click()
+try:
+    notnow = webdriver.find_element_by_xpath('//*[@id="react-root"]/section/main/div/div/div/div/button')
+    notnow.click()
+    sleep(5)
+except:
+    print(' Working...')
+try:
+    notifications = webdriver.find_element_by_xpath('/html/body/div[4]/div/div/div/div[3]/button[2]')
+    notifications.click()
+except:
+    print('No notification prompt to close, youre fine.')
 menu()
-
 sleep(2)
