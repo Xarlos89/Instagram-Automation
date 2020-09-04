@@ -82,7 +82,7 @@ def watchstories():
 def likes():
     likes = 0
     tag = -1
-    hashtag_list = open('***** PATH TO HASHTAGLIST.txt *****').readlines()
+    hashtag_list = open('***** COPY PATH OF HASTAGLIST.TXT HERE *****').readlines()
     for hashtag in hashtag_list:
         tag = tag+1
         print('Liking the hashtag: ' + hashtag_list[tag])
@@ -92,20 +92,18 @@ def likes():
         image_img.click()
         sleep(1)
         likes = 0
-        while (likes <= 1): #Set max amount of likes
+        while (likes <= 5): #Set max amount of likes
             sleep(1)
             image_like_svg = webdriver.find_element_by_css_selector('body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > div > span > svg')
-            image_like_label=image_like_svg.get_attribute("aria-label")
+            image_like_label = image_like_svg.get_attribute("aria-label")
             if image_like_label == "Like":
-                sleep(2)
                 image_like_svg.click()
                 likes += 1
                 print('liked images: {}'.format(likes))
-                sleep(randint(4, 9))
+                print("Looking for image...")
+                sleep(randint(2, 4))
                 image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
                 image_next.click()
-                print("Looking for image...")
-                sleep(randint(4, 7))
             else:
                 print('Image already liked')
                 image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
@@ -114,7 +112,7 @@ def likes():
         else:
             sleep(2)
             print('finished with the hashtag: ' + hashtag_list[tag])
-            image_close=webdriver.find_element_by_class_name('wpO6b')
+            image_close=webdriver.find_element_by_css_selector('body > div._2dDPU.CkGkG > div.Igw0E.IwRSH.eGOV_._4EzTm.BI4qX.qJPeX.fm1AK.TxciK.yiMZG > button > div > svg')
             sleep(2)
             image_close.click()
             sleep(2)
