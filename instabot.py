@@ -80,10 +80,11 @@ def watchstories():
     menu()
 
 def likes():
-    likes = 0
+    hashtag_list = open ("hashtaglist.txt").readlines()
     tag = -1
-    hashtag_list = open('***** COPY PATH OF HASTAGLIST.TXT HERE *****').readlines()
+    goalLikes= int(input('How many likes should we do in each hashtag?: '))
     for hashtag in hashtag_list:
+        currentLikes = 0
         tag = tag+1
         print('Liking the hashtag: ' + hashtag_list[tag])
         webdriver.get('https://www.instagram.com/explore/tags/' + hashtag_list[tag] + '/')
@@ -91,31 +92,34 @@ def likes():
         sleep(1)
         image_img.click()
         sleep(1)
-        likes = 0
-        while (likes <= 5): #Set max amount of likes
-            sleep(1)
-            image_like_svg = webdriver.find_element_by_css_selector('body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > div > span > svg')
-            image_like_label = image_like_svg.get_attribute("aria-label")
-            if image_like_label == "Like":
-                image_like_svg.click()
-                likes += 1
-                print('liked images: {}'.format(likes))
-                print("Looking for image...")
-                sleep(randint(2, 4))
-                image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
-                image_next.click()
+        try:
+            while (currentLikes != goalLikes):
+                sleep(3)
+                image_like_svg = webdriver.find_element_by_css_selector('body > div._2dDPU.CkGkG > div.zZYga > div > article > div.eo2As > section.ltpMr.Slqrh > span.fr66n > button > div > span > svg')
+                image_like_label = image_like_svg.get_attribute("aria-label")
+                if image_like_label == "Like":
+                    image_like_svg.click()
+                    currentLikes += 1
+                    print('Liked images: {}'.format(currentLikes))
+                    print("Looking for image...")
+                    sleep(randint(2, 4))
+                    image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
+                    image_next.click()
+                elif image_like_label == "Unlike":
+                    print('Image already liked.')
+                    image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
+                    image_next.click()
+                    sleep(1)
             else:
-                print('Image already liked')
+                sleep(5)
                 image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
                 image_next.click()
                 sleep(1)
-        else:
-            sleep(2)
-            print('finished with the hashtag: ' + hashtag_list[tag])
-            image_close=webdriver.find_element_by_css_selector('body > div._2dDPU.CkGkG > div.Igw0E.IwRSH.eGOV_._4EzTm.BI4qX.qJPeX.fm1AK.TxciK.yiMZG > button > div > svg')
-            sleep(2)
-            image_close.click()
-            sleep(2)
+        except:
+            print('Oops, Instagram is having trouble in this tag, lets go to the next one. ')
+            image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
+            image_next.click()
+            continue
         print("Finished liking hashtag: " + hashtag_list[tag])
         sleep(1)
     print("Finished liking all hashtags in the hashtag list.")
