@@ -102,14 +102,14 @@ def likes():
                     currentLikes += 1
                     print('Liked images: {}'.format(currentLikes))
                     print("Looking for image...")
-                    sleep(randint(2, 4))
+                    sleep(randint(3, 7))
                     image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
                     image_next.click()
                 elif image_like_label == "Unlike":
                     print('Image already liked.')
                     image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
                     image_next.click()
-                    sleep(1)
+                    sleep(randint(1, 4))
             else:
                 sleep(5)
                 image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
