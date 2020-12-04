@@ -17,26 +17,24 @@ from tqdm import tqdm_gui
 sys.path.insert(0, './utils/')
 import secret
 
-print('=======================================================')
-print('==========*                                 *==========')
-print('==========*                                 *==========')
-print('==========*         Instagram Bot           *==========')
-print('==========*                                 *==========')
-print('==========*                                 *==========')
-print("==================     By: Adam     ===================")
-print("==================    Version 5.0    ==================")
+print('\033[0;33m=======================================================\033[m')
+print('\033[0;33m==========*                                 *==========\033[m')
+print('\033[0;33m==========*                                 *==========\033[m')
+print('\033[0;33m==========*\033[m         Instagram Bot           \033[0;33m*==========\033[m')
+print('\033[0;33m==========*                                 *==========\033[m')
+print('\033[0;33m==========*                                 *==========\033[m')
+print("\033[0;33m==================\033[m     By: Adam     \033[0;33m===================\033[m")
+print("\033[0;33m==================\033[m  Version 6.9.420 \033[0;33m===================\033[m")
 sleep(1)
-print("=============== Loading magic stuff... ================")
-for i in tqdm(range(100)):
-     sleep(0.01)
-     pass
+print("\033[0;33m===============\033[m Loading magic stuff... \033[0;33m================\033[m")
+
 
 def menu():
     menu = {}
-    menu['1'] = "Watch Instagram Stories"
-    menu['2'] = "Like Hashtagged posts"
-    menu['3'] = "Edit hashtag list"
-    menu['4'] = "Exit"
+    menu['1'] = "\033[0;33mWatch Instagram Stories\033[m"
+    menu['2'] = "\033[0;33mLike Hashtagged posts\033[m"
+    menu['3'] = "\033[0;33mEdit hashtag list\033[m"
+    menu['4'] = "\033[0;33mExit\033[m"
     while True:
         options = menu.keys()
         for entry in options:
@@ -54,39 +52,43 @@ def menu():
             hashtag_menu()
         elif selection == '4':
             os.system('clear')
-            break
+            webdriver.close()
+            sys.exit()
         else:
             print("\nYou have to choose an option between 1 and 4. \n")
             menu()
 
 def watchstories():
+    numStoriesToWatch = int(input('\033[0;33mHow many stories should we watch?\033[m ')) # value modifies how many stories you want to watch
     sleep(1)
-    webdriver.find_element_by_xpath('//*[@id="react-root"]/section/main/section/div[1]/div[1]/div/div/div/div/ul/li[3]/div/button/div[1]/span').click() # click on the tab where the stories are
+    webdriver.find_element_by_css_selector('#react-root > section > main > section > div > div.zGtbP.IPQK5.VideM > div > div > div > div > ul > li:nth-child(3) > div > button > div.RR-M-.QN629 > span').click() # click on the tab where the stories are
+    sleep(1)
     stories_watched = 0
-    sleep(2)
+    sleep(1)
     try:
-        while webdriver.find_element_by_class_name('coreSpriteRightChevron') and stories_watched < 200: # value modifies how many stories you want to watch
-            webdriver.find_element_by_class_name('coreSpriteRightChevron').click() # Clicks next story.
-            sleep(randint(1, 4)) # Random timer to skip through stories.
+        while (stories_watched != numStoriesToWatch):
+            webdriver.find_element_by_css_selector('#react-root > section > div.Igw0E.rBNOH.YBx95.vwCYk > div > section > div > button.FhutL > div').click() # Clicks next story.
             stories_watched += 1
-            print("stories watched: {}".format(stories_watched))
+            print("\033[0;33mstories watched:\033[m {}".format(stories_watched))
+            sleep(randint(1, 3)) # Random timer to skip through stories.
     except KeyboardInterrupt:
         print('\033[0;33mProgram terminated by the user!\033[m')
         loadstories = 0
     except:
-        print('\033[0;33mEND! No more stories to view\033[m')
+        print('\033[0;33mNo more stories to view\033[m')
         loadstories = 0
-    #webdriver.find_element_by_class_name('Szr5J').click()  # Exits the story menu. I think Instagram nerfed this.
+    print("\033[0;33mFinished watching\033[m {} \033[0;33mstories\033[m".format(stories_watched))
+    goHome()
     menu()
 
 def likes():
     hashtag_list = open ("hashtaglist.txt").readlines()
     tag = -1
-    goalLikes= int(input('How many likes should we do in each hashtag?: '))
+    goalLikes= int(input('\033[0;33mHow many likes should we do in each hashtag?:\033[m '))
     for hashtag in hashtag_list:
         currentLikes = 0
         tag = tag+1
-        print('Liking the hashtag: ' + hashtag_list[tag])
+        print('\033[0;33mLiking the hashtag:\033[m ' + hashtag_list[tag])
         webdriver.get('https://www.instagram.com/explore/tags/' + hashtag_list[tag] + '/')
         image_img=webdriver.find_element_by_xpath('/html/body/div[1]/section/main/article/div[2]/div/div[1]/div[1]')
         sleep(1)
@@ -100,13 +102,13 @@ def likes():
                 if image_like_label == "Like":
                     image_like_svg.click()
                     currentLikes += 1
-                    print('Liked images: {}'.format(currentLikes))
+                    print('Liked images: \033[0;33m{}\033[m'.format(currentLikes))
                     print("Looking for image...")
                     sleep(randint(3, 7))
                     image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
                     image_next.click()
                 elif image_like_label == "Unlike":
-                    print('Image already liked.')
+                    print('\033[0;33mImage already liked.\033[m')
                     image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
                     image_next.click()
                     sleep(randint(1, 4))
@@ -120,37 +122,37 @@ def likes():
             image_next = webdriver.find_element_by_class_name('coreSpriteRightPaginationArrow')
             image_next.click()
             continue
-        print("Finished liking hashtag: " + hashtag_list[tag])
+        print("\033[0;33mFinished liking hashtag:\033[m " + hashtag_list[tag])
         sleep(1)
-    print("Finished liking all hashtags in the hashtag list.")
-    webdriver.get('https://www.instagram.com/')
+    print("\033[0;33mFinished liking all hashtags in the hashtag list.\033[m")
+    goHome()
     sleep(2)
     menu()
 
 def hashtag_menu():
-     menu2 = {}
-     menu2['1'] = "Add hashtag to hashtag list"
-     menu2['2'] = "Show hashtag list"
-     menu2['3'] = "Delete hashtags from hashtag list"
-     menu2['4'] = "Done. Go back to main menu"
-     while True:
-        options2 = menu2.keys()
-        for entry2 in options2:
-            print (entry2, menu2[entry2])
+    menu2 = {}
+    menu2['1'] = "Add hashtag to hashtag list"
+    menu2['2'] = "Show hashtag list"
+    menu2['3'] = "Delete hashtags from hashtag list"
+    menu2['4'] = "Done. Go back to main menu"
+    while True:
+       options2 = menu2.keys()
+       for entry2 in options2:
+           print (entry2, menu2[entry2])
 
-        selection2 = str(input("What would you like to do? "))
-        if selection2 == '1':
-            add_tag()
-        elif selection2 == '2':
-            show_list()
-        elif selection2 == '3':
-            deletetag()
-        elif selection2 == '4':
-            os.system('clear')
-            menu()
-        else:
-            print("\nYou must choose an option between 1 and 4.\n")
-            hashtag_menu()
+       selection2 = str(input("What would you like to do? "))
+       if selection2 == '1':
+           add_tag()
+       elif selection2 == '2':
+           show_list()
+       elif selection2 == '3':
+           deletetag()
+       elif selection2 == '4':
+           os.system('clear')
+           menu()
+       else:
+           print("\nYou must choose an option between 1 and 4.\n")
+           hashtag_menu()
 
 def add_tag():
     with open("hashtaglist.txt", "a") as hashtaglist:
@@ -177,18 +179,29 @@ def deletetag():
             print(line.strip("\n"))
         print("\n")
     with open("hashtaglist.txt", "w+") as f:
-        userinput = input("What hastag would you like to delete? ")
+        userinput = input("What hashtag would you like to delete? ")
         for line in list:
             if line.strip("\n") != userinput:
                 f.write(line)
+                
+def goHome():
+    webdriver.get('https://www.instagram.com/')
+    sleep(3)
 
 ## Open Selenium Webdriver
-chromedriver_path = '*******UPDATE THIS TO YOUR CHROMEDRIVER FILE PATH*******'  # Change this to your own chromedriver path!
-webdriver = webdriver.Chrome(executable_path="********UPDATE THIS TO YOUR CHROMEDRIVER FILE PATH")# Change this one too
+chromedriver_path = '************* REPLACE THIS TEXT WITH CHROMEDRIVER FILE PATH *******'  # Change this to your own chromedriver path!
+webdriver = webdriver.Chrome(executable_path= chromedriver_path)
 sleep(2)
 webdriver.get('https://www.instagram.com/accounts/login/?source=auth_switcher')
+for i in tqdm(range(100)):
+    sleep(0.02)
+try: ### This accepts the cookies offered by instagram
+    acceptCookies = webdriver.find_element_by_xpath('/html/body/div[2]/div/div/div/div[2]/button[1]')
+    acceptCookies.click()
+    sleep(1)
+except:
+    pass
 
-sleep(3)
 ### Log in
 usernameEntry = webdriver.find_element_by_name('username')
 usernameEntry.clear()
@@ -206,7 +219,7 @@ try:
     notnow.click()
     sleep(5)
 except:
-    print(' Working...')
+    pass
 try:
     notifications = webdriver.find_element_by_xpath('/html/body/div[4]/div/div/div/div[3]/button[2]')
     notifications.click()
