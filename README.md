@@ -26,6 +26,8 @@ Using the Instabot
 - type "Python instabot.py"
 - To set your hashtags, edit hashtaglist.txt. Keep the format the same. 
 
+I highly reccomend keeping your total likes to under 500 per day to not upset the Instagram gods. You've been warned. 
+
 
 -----------------------------
 December 4, 2020
