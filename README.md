@@ -9,7 +9,7 @@ Prerequisites
 You must have Google Chrome installed.
 https://www.google.com/chrome/
 
-You must have ChromeDriver 
+You must have ChromeDriver.
 I am currently using version 87.0.4280.20, however use the version that works with your version of Chrome.
 https://chromedriver.chromium.org/downloads
 
