@@ -1,3 +1,10 @@
+# Archived
+
+Due to me not really caring about Instagram or this project any more. I have decided to archive this repo.
+Take it if you want. It was fun playing with Selenium, but the xpaths and css has probably changed several times since I last ran this. 
+
+---
+
 # Instagram-bot
  A simple instagram bot. Initial upload.
  This bot is provided for educational purposes only. I am not responsible for what you do, or what happens to your accounts when you use this bot.
